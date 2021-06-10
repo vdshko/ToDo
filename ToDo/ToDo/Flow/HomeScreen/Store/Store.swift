@@ -13,15 +13,17 @@ final class Store: ObservableObject {
     @Published var sorted: SortType = .order
     @Published private(set) var state: AppState
     
-    init(state: AppState = AppState(todoItems: [ToDoItem](), sortType: .order)) {
+    private let reducer: Reducer
+    
+    init(
+        state: AppState = AppState(todoItems: [ToDoItem](), sortType: .order),
+        reducer: Reducer = Reducer()
+    ) {
         self.state = state
+        self.reducer = reducer
     }
     
     func dispatch(action: Action) {
-        reducer(state: &state, action: action) { newState in
-            DispatchQueue.main.async {
-                self.state = newState
-            }
-        }
+        reducer.update(&state, with: action)
     }
 }

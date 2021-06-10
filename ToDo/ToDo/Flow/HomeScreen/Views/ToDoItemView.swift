@@ -1,5 +1,5 @@
 //
-//  ToDoView.swift
+//  ToDoItemView.swift
 //  ToDo
 //
 //  Created by Vlad Shkodich on 08.06.2021.
@@ -7,27 +7,30 @@
 
 import SwiftUI
 
-struct ToDoView: View {
+struct ToDoItemView: View {
     
-    var todoItem: ToDoItem
-    var body: some View {
+    var body: some View { return bodyView() }
+    
+    let todoItem: ToDoItem
+    
+    private func bodyView() -> some View {
         VStack(alignment: .leading) {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Name:")
+                    Text(Constants.name)
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Text(todoItem.name)
                 }
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text("Date:")
+                    Text(Constants.date)
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Text(todoItem.date, style: .date)
                 }
             }
-            Text("Target:")
+            Text(Constants.target)
                 .font(.caption)
                 .foregroundColor(.secondary)
             Text(todoItem.target)
@@ -44,9 +47,27 @@ struct ToDoView: View {
     }
 }
 
+private extension ToDoItemView {
+    
+    enum Constants {
+        
+        static let name: String = "Name:"
+        static let date: String = "Date:"
+        static let target: String = "Target:"
+    }
+}
+
+#if DEBUG
 struct ToDoView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ToDoView(todoItem: ToDoItem(name: "Name", target: "Some Target...", date: Date(), priority: .medium))
+        ToDoItemView(
+            todoItem: ToDoItem(
+                name: "Name",
+                target: "Some Target...",
+                date: Date(), priority: .medium
+            )
+        )
     }
 }
+#endif
