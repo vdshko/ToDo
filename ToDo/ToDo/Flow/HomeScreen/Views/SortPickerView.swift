@@ -10,6 +10,7 @@ import SwiftUI
 struct SortPickerView: View {
     
     @EnvironmentObject var store: Store
+    
     var body: some View {
         Picker(selection: $store.sorted, label: Text("")) {
             ForEach(SortType.allCases) {
@@ -22,6 +23,7 @@ struct SortPickerView: View {
     }
 }
 
+#if DEBUG
 struct SortPickerView_Previews: PreviewProvider {
     
     static var previews: some View {
@@ -29,3 +31,4 @@ struct SortPickerView_Previews: PreviewProvider {
             .environmentObject(Store())
     }
 }
+#endif

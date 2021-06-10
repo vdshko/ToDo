@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeScreenView.swift
 //  ToDo
 //
 //  Created by Vlad Shkodich on 08.06.2021.
@@ -7,23 +7,25 @@
 
 import SwiftUI
 
-struct ContentView: View {
-
+struct HomeScreenView: View {
+    
     var body: some View {
         NavigationView {
             VStack {
                 SortPickerView()
-                ToDoListView()
+                ToDoItemsListView()
             }
-            .modifier(ContentViewMod())
+            .modifier(HomeScreenNavigationModifier())
         }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-
+#if DEBUG
+struct HomeScreenView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        ContentView()
+        HomeScreenView()
             .environmentObject(Store())
     }
 }
+#endif
